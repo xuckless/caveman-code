@@ -49,6 +49,20 @@ function transition(s: Status, e: Event): Status {
 ```
 Every allowed transition is visible in one place, and tests are one row per entry.
 
+#### Pick the table's shape from the spec, not from the happy path
+A cycle table (`phase → { duration, next }`) looks clean for a traffic light's normal loop. But the spec also had emergencies, night mode and pedestrian presses, and the table had no slot for them. Every later feature then became a flag or an intercept beside the table (eval: go-traffic-light, both runs).
+```ts
+// too narrow: only one way out of each phase
+const CYCLE = { nsGreen: { secs: 30, next: 'nsYellow' }, ... }
+
+// right shape: every event has a cell, and timeouts are just another event
+const TRANSITIONS = {
+  nsGreen:  { timeout: 'nsYellow', emergencyEW: 'nsYellowToEW', night: 'nsYellowToNight', pedEW: 'nsGreenShort' },
+  ...
+}
+```
+Rule of thumb: list the spec's events first. If any event can happen in more than one state, you need `state × event`.
+
 ### Rung 4: a library (XState, etc.)
 Only for hierarchical or parallel states, or when you need visualization. If you're asking whether you need it, you don't.
 

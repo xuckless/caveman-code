@@ -30,3 +30,4 @@ Ordered by how much damage they do. Add real examples from real model output her
 | Notify-first | Listeners run before buffers are flushed and timers set | Side effects first, notify last, then re-check |
 | Bug-locking test | A test asserting `PaymentDue(0)` or empty flags | Fix the code, not the expectation |
 | Thin tests | Half the test code, missing edge cases | Short test code, many rows |
+| Too-narrow table | A cycle table with one `next` per state, while the spec has interrupts and modes | Index by `state × event` from the start |

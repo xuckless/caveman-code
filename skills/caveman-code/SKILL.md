@@ -50,6 +50,7 @@ Rules:
 - **Slow exits get their own state.** If leaving a state takes time (cancelling a running job, closing a socket), add the in-between state (`cancelling`). Don't report the final state before it's true.
 - **Notify last.** Inside a transition, finish all side effects (flush buffers, start or stop timers) and *then* call listeners. Listeners can call back into you, so re-check the state after any callback before doing more work.
 - **Re-entering the current state is usually a no-op.** Choosing the mode you're already in must not reset timers or trigger lockouts.
+- **Give the table the shape of the behavior.** A single `next` per state fits only a pure cycle. If the spec has interrupts, queues, modes, overrides or anything that reacts to events, index the table by `state × event → next` from the start, with per-state entry actions and per-state data. If a requirement can't be written as a row, the table is the wrong shape: fix the shape, don't add a flag beside it.
 - **Make the table the obvious place to extend.** Put a one-line *why* comment on any table that drives behavior, saying how to extend it ("every transition is a row here; add new behavior as a state or row, not as a branch in `send()`"). The next maintainer may not know the convention. When *you* extend such code, add the row: never intercept events before the table.
 
 → [references/state-machines.md](references/state-machines.md)
