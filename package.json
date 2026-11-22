@@ -1,0 +1,41 @@
+{
+  "name": "@xuckless/caveman-code",
+  "version": "0.1.0",
+  "description": "Agent skill that makes LLMs write declarative, explicit-state, simplest-possible code. Installs into Claude Code, Codex, Cursor, Copilot, Windsurf, Antigravity.",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "caveman-code": "bin/install.js"
+  },
+  "files": [
+    "bin",
+    "skills"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "agent-skills",
+    "codex",
+    "cursor",
+    "copilot",
+    "claude",
+    "agent-skill",
+    "llm",
+    "coding-style",
+    "simplicity",
+    "state-machine",
+    "declarative"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuckless/caveman-code.git"
+  },
+  "homepage": "https://github.com/xuckless/caveman-code#readme",
+  "bugs": {
+    "url": "https://github.com/xuckless/caveman-code/issues"
+  }
+}

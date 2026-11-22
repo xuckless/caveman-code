@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="196" viewBox="0 0 480 196" role="img" aria-label="Looking up uk: the if-else ladder checks branch after branch, the rates table goes straight to the row">
+<title>Looking up uk: the if-else ladder checks branch after branch, the rates table goes straight to the row</title>
+<style>
+text { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', monospace; font-size: 12.5px; fill: #c0caf5; }
+.m { fill: #8089b3; } .s { font-family: -apple-system, 'Segoe UI', Inter, Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; }
+* { transform-box: fill-box; }
+.scan { animation: scan 6s infinite; }
+@keyframes scan { 0% { transform: translateY(0); opacity: .18; } 15% { transform: translateY(0); } 30% { transform: translateY(26px); } 45% { transform: translateY(52px); } 70% { transform: translateY(52px); opacity: .18; } 80%, 100% { opacity: 0; } }
+.hit, .hitlbl { animation: hit 6s infinite; }
+@keyframes hit { 0%, 12% { opacity: 0; } 18%, 70% { opacity: .22; } 80%, 100% { opacity: 0; } }
+.hitlbl { animation-name: hitlbl; }
+@keyframes hitlbl { 0%, 12% { opacity: 0; } 18%, 70% { opacity: 1; } 80%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+<rect x=".5" y=".5" width="479" height="195" rx="10" fill="#1f2335" stroke="#2f3449"/>
+
+<text class="s m" x="24" y="30">branches: read top to bottom</text>
+<text class="s m" x="300" y="30">rows: look it up</text>
+<line x1="276" y1="44" x2="276" y2="176" stroke="#2f3449"/>
+<rect class="scan" x="16" y="49" width="252" height="22" rx="4" fill="#7aa2f7" opacity=".18"/>
+<text x="24" y="65">if (r === 'us') return 5</text><text x="24" y="91">else if (r === 'eu') return 8</text><text x="24" y="117">else if (r === 'uk') return 7</text><text x="24" y="143">else if (r === 'au') return 12</text>
+<text class="s m" x="24" y="176">region = 'uk'</text>
+<text x="300" y="62" class="m">RATES = {</text>
+<text x="316" y="86">us: <tspan style="fill:#ff9e64">5</tspan>,</text><text x="316" y="108">eu: <tspan style="fill:#ff9e64">8</tspan>,</text><text x="316" y="130">uk: <tspan style="fill:#ff9e64">7</tspan>,</text><text x="316" y="152">au: <tspan style="fill:#ff9e64">12</tspan>,</text>
+<text x="300" y="176" class="m">}</text>
+<rect class="hit" x="308" y="114" width="96" height="21" rx="4" fill="#9ece6a" opacity=".22"/>
+<text class="hitlbl s" x="414" y="130" style="fill:#9ece6a">← 7</text>
+</svg>
