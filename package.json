@@ -1,6 +1,6 @@
 {
   "name": "@xuckless/caveman-code",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Agent skill that makes LLMs write declarative, explicit-state, simplest-possible code. Installs into Claude Code, Codex, Cursor, Copilot, Windsurf, Antigravity.",
   "type": "module",
   "publishConfig": {

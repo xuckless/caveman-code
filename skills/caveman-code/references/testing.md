@@ -6,7 +6,12 @@ Tests follow the same principles: cases are data (declarative), every transition
 - **Durable only.** Every test you write stays in the suite. Never write a one-off test to check something once and then forget it. If it's worth checking, it's worth keeping. If it isn't worth keeping, use the REPL or run the code instead.
 - **Test behavior**, through public inputs and outputs. Never assert on private fields or call order.
 - **Table-driven by default.** Cases are rows; one loop runs them.
-- **Grow existing tables** before creating new test files or functions.
+- **Rows before functions.** Before adding a test function, find an existing table for the same subject (same function, same input shape, same assertion shape) and add named rows to it. A new test function is justified only by:
+  - a different **assertion shape** (e.g. checks emitted events, not a return value),
+  - a different **fixture** (needs setup the table's loop doesn't have), or
+  - a different **public entry point**.
+  When you add one, say which reason applies in one line. Rows in one table are cheaper to read, keep one assertion shape, and make gaps visible: a missing row stands out, a missing test function doesn't.
+- Golden/byte-for-byte tests and fixture-heavy integration tests keep their own functions.
 - **Mock only at I/O edges**: network, filesystem, database, clock, randomness. Heavy mocking means logic is tangled with I/O, so fix the design instead.
 - **State machines: test every transition**, one row per `(state, event)`, including rejected events.
 - **Reuse fixtures and builders** that already exist. Don't create a helper for a single test.

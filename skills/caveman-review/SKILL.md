@@ -17,6 +17,7 @@ Review the target (default: uncommitted changes, via `git diff HEAD`; otherwise 
 | 4 | Duplication | Logic repeated in the diff or already existing elsewhere in the repo (search for it) |
 | 5 | Single-use helpers | New functions with exactly one caller |
 | 6 | Tests | Throwaway or one-off tests; copy-paste tests that should be one table; mocks of non-I/O; untested transitions |
+| 7 | Rows before functions | A new test function whose cases could be rows in an existing table in the same file or suite (same subject, same assertion shape). Fix: move the cases into that table as named rows. Golden and fixture-heavy integration tests are exempt |
 
 ## Output
 For each finding, report: `file:line`, check #, what it is, and the caveman fix (a short snippet when it helps).

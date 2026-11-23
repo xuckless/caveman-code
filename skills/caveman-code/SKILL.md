@@ -85,7 +85,7 @@ Within the shape set by 1 and 2, write the least code that solves today's proble
 - **Never write a test that locks in a bug.** If an expected value looks odd (`PaymentDue(0)`, empty flags after parsing them), fix the code, not the expectation.
 - **Mock only at I/O edges** (network, filesystem, database, clock). Pure logic needs no mocks.
 - State machines: **one row per transition**, `(state, event) → expected next`, including rejected events.
-- Add a case to an existing table before creating a new test file.
+- **Rows before functions.** Before adding a test function or block, look for an existing table test of the same behavior (same function, same input shape, same assertion shape) and add named rows to it. Add a new test function only when no table fits: a different assertion shape, a different fixture, or a different public entry point. When you add one, say which reason applies in one line.
 
 → [references/testing.md](references/testing.md)
 
@@ -101,7 +101,7 @@ Within the shape set by 1 and 2, write the least code that solves today's proble
 - [ ] More than one boolean describing one thing's mode? Any representable invalid state?
 - [ ] Any duplicated logic? Any helper with exactly one caller?
 - [ ] Anything added that nobody asked for?
-- [ ] Is every new test durable, behavioral, and table-driven where it has more than one case?
+- [ ] Is every new test durable, behavioral, and table-driven where it has more than one case? Did I add rows to an existing table before writing a new test function?
 - [ ] If I wrote a state machine, is there a test table with one row per `(state, event) → next`, including ignored or rejected events?
 - [ ] Do the functions I touched now follow these principles?
 
