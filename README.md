@@ -49,6 +49,8 @@ Thirty tasks in six languages, each built with and without the skill and judged 
 
 `/caveman-review` checks a diff against the rules and lists each finding with its fix.
 
+It is not a correctness review. For concurrency or lifetime refactors, pair it with an adversarial one. In [Anole](https://github.com/xuckless/anole)'s S3 audit, making state explicit surfaced 9 latent bugs, including use-after-free and leak paths that earlier reviews had missed, and the correctness review caught 9 refactor bugs the caveman review missed.
+
 ## License
 
 MIT

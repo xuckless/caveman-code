@@ -18,10 +18,12 @@ Review the target (default: uncommitted changes, via `git diff HEAD`; otherwise 
 | 5 | Single-use helpers | New functions with exactly one caller |
 | 6 | Tests | Throwaway or one-off tests; copy-paste tests that should be one table; mocks of non-I/O; untested transitions |
 | 7 | Rows before functions | A new test function whose cases could be rows in an existing table in the same file or suite (same subject, same assertion shape). Fix: move the cases into that table as named rows. Golden and fixture-heavy integration tests are exempt |
+| 8 | Refactor safety | Only when the diff turns existing code into a union or table: no characterization tests of the old behavior; lookups of undecided cells that can panic or return `undefined`; actions not guarded by their source state; resources released by zero or several states; in-between states (`stopping`, `cancelling`) with no rows for racing events; increasing-only values that can now go backwards |
 
 ## Output
 For each finding, report: `file:line`, check #, what it is, and the caveman fix (a short snippet when it helps).
 Order by check number, most severe first within each. Only report findings you'd defend; skip style nits.
-End with a one-line verdict: **caveman** (clean), **mostly caveman** (minor findings), or **not caveman** (findings in checks 1–2 or 4).
+End with a one-line verdict: **caveman** (clean), **mostly caveman** (minor findings), or **not caveman** (findings in checks 1–2, 4 or 8).
+After the verdict, add: "Not a correctness review. For state or lifetime refactors, run an adversarial correctness review too."
 
 Don't edit files unless the user asks for fixes.

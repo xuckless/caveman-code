@@ -52,6 +52,15 @@ Rules:
 - **Re-entering the current state is usually a no-op.** Choosing the mode you're already in must not reset timers or trigger lockouts.
 - **Give the table the shape of the behavior.** A single `next` per state fits only a pure cycle. If the spec has interrupts, queues, modes, overrides or anything that reacts to events, index the table by `state × event → next` from the start, with per-state entry actions and per-state data. If a requirement can't be written as a row, the table is the wrong shape: fix the shape, don't add a flag beside it.
 - **Make the table the obvious place to extend.** Put a one-line *why* comment on any table that drives behavior, saying how to extend it ("every transition is a row here; add new behavior as a state or row, not as a branch in `send()`"). The next maintainer may not know the convention. When *you* extend such code, add the row: never intercept events before the table.
+- **Restructuring existing code is the risky part.** When you turn working code into a union or table, the rewrite is where new bugs come in:
+  - Write characterization tests of the old behavior first. The new table must pass them unchanged.
+  - Looking up an undecided cell gives a defined rejection, never a panic or `undefined`.
+  - Every action is guarded by its source state.
+  - Every resource (memory, handle, socket, task) has exactly one state that releases it.
+  - Each in-between state has rows for the events that can race it (stop during `stopping`, cancel during `cancelling`).
+  - Values that only increase still only increase.
+
+  This is a design check, not a correctness review. For concurrency or lifetime refactors, also run an adversarial correctness review.
 
 → [references/state-machines.md](references/state-machines.md)
 
@@ -103,6 +112,7 @@ Within the shape set by 1 and 2, write the least code that solves today's proble
 - [ ] Anything added that nobody asked for?
 - [ ] Is every new test durable, behavioral, and table-driven where it has more than one case? Did I add rows to an existing table before writing a new test function?
 - [ ] If I wrote a state machine, is there a test table with one row per `(state, event) → next`, including ignored or rejected events?
+- [ ] If I restructured existing code: do characterization tests of the old behavior still pass? Is every undecided cell a defined rejection, every action guarded by its source state, every resource released by exactly one state, every in-between state covered for racing events, and every increasing-only value still increasing-only?
 - [ ] Do the functions I touched now follow these principles?
 
 Examples: [examples/](examples/) · Real LLM failures: [examples/llm-failures.md](examples/llm-failures.md) · Common traps: [references/anti-patterns.md](references/anti-patterns.md)
